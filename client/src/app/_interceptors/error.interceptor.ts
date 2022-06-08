@@ -18,8 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private toastr: ToastrService
   ) { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler)
-    : Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(
         error => {
@@ -43,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               case 401:
                 if (error.error !== null) {
                   this.toastr.error(error.error);
-                } 
+                }
                 else {
                   this.toastr.error(error.statusText === "OK"
                     ? "Unauthorized"
@@ -61,6 +60,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 //   : error.statusText, error.status);
                 break;
               case 404:
+                // console.log(error)
                 this.router.navigateByUrl('/not-found');
                 break;
               case 500:

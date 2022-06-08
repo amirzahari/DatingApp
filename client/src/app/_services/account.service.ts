@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -10,11 +11,18 @@ import { User } from '../_models/user';
 
 export class AccountService {
   
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    //console.log("+++ [START] AccountService : constructor()");
+    //console.log("this.currentUserSource");
+    //console.log(this.currentUserSource);
+    //console.log("this.currentUser$");
+    //console.log(this.currentUser$);
+    //console.log("+++ [END] AccountService : constructor()");
+  }
 
   login(model:any){
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
@@ -56,7 +64,10 @@ export class AccountService {
   }
 
   setCurrentUser(user: User){
+    console.log("+++ [START] AccountService : setCurrentUser()");
     this.currentUserSource.next(user);
+    console.log("Set user to currentUserSource.next(user)");
+    console.log("+++ [END] AccountService : setCurrentUser()");
   }
 
   logout(){
