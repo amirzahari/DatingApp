@@ -29,7 +29,7 @@ namespace API.Data
             // *** [aznote] the query will select only selected variable as we need in DTO.
             // *** [aznote] not the whole of data.
 
-            // *** [aznote] using auto mapping (manual)
+            // *** [aznote] using auto mapping
             // *** [aznote] PhotoUrl and Age, configure in AutoMapperProfiles.
             // *** [aznote] no need .Include(p => p.Photos)
             // *** [aznote] automatically done by EF
