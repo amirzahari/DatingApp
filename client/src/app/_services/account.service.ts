@@ -41,8 +41,7 @@ export class AccountService {
       map(
         (user:User) => {
           if(user){
-            localStorage.setItem('user', JSON.stringify(user));
-            this.currentUserSource.next(user);
+            this.setCurrentUser(user);
           }
         }
       )
@@ -54,8 +53,8 @@ export class AccountService {
       map(
         (user:User) => {
           if(user){
-            localStorage.setItem('user', JSON.stringify(user));
-            this.currentUserSource.next(user);
+            this.setCurrentUser(user);
+            //this.currentUserSource.next(user);
           }
           return user;
         }
@@ -64,10 +63,11 @@ export class AccountService {
   }
 
   setCurrentUser(user: User){
-    console.log("+++ [START] AccountService : setCurrentUser()");
+    //console.log("+++ [START] AccountService : setCurrentUser()");
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
-    console.log("Set user to currentUserSource.next(user)");
-    console.log("+++ [END] AccountService : setCurrentUser()");
+    // console.log("Set user to currentUserSource.next(user)");
+    // console.log("+++ [END] AccountService : setCurrentUser()");
   }
 
   logout(){
