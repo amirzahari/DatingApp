@@ -1,0 +1,45 @@
+<div class="mt-3">
+    <label for={{id}} class="form-label">{{label}}</label>
+    <input 
+
+        [class.is-invalid]='ngControl.touched && ngControl.invalid'
+        type="{{type}}"
+        class="form-control"
+        [formControl]='ngControl.control'
+        id={{id}}>
+
+        <div *ngIf='ngControl.control.errors?.required' class="invalid-feedback">
+            Please enter a {{label}}
+        </div>
+
+        <div *ngIf='ngControl.control.errors?.minlength' class="invalid-feedback">
+            {{label}} must be at least {{ngControl.control.errors.minlength['requiredLength']}} characters
+        </div>
+
+        <div *ngIf='ngControl.control.errors?.maxlength' class="invalid-feedback">
+            {{label}} must be at most {{ngControl.control.errors.maxlength['requiredLength']}} characters
+        </div>
+
+        <div *ngIf='ngControl.control.errors?.isMatching' class="invalid-feedback">
+            Passwords do not match
+        </div>
+
+        <!-- <p>{{ngControl.control.errors?.minlength | json}}</p> -->
+
+</div>
+
+<!-- Original code from standard componenet -->
+<!-- <div class="mt-3">
+    <label for="id_confirmPassword" class="form-label">Confirm Password</label>
+    <input 
+        [class.is-invalid]='registerForm.get("confirmPassword").errors 
+            && registerForm.get("confirmPassword").touched'
+        type="password" 
+        class="form-control" 
+        formControlName="confirmPassword" 
+        id="id_confirmPassword">
+        <div *ngIf="registerForm.get('confirmPassword').hasError('required')" 
+            class="invalid-feedback">Please enter a confirm password</div>
+        <div *ngIf="registerForm.get('confirmPassword').hasError('isMatching')" 
+            class="invalid-feedback">Confirm Password must match password</div>
+</div> -->
