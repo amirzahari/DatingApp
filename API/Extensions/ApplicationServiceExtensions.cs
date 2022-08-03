@@ -21,6 +21,8 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             // *** [aznote] Add Interface Implementation for Cloudinary.
             services.AddScoped<IPhotoService, PhotoService>();
+            // *** Handle process before execute httpcontext.
+            services.AddScoped<LogUserActivity>();
             // *** [aznote] Add Interface Implementation for User Repository
             services.AddScoped<IUserRepository, UserRepository>();
             // *** [aznote] Add automapper implementation   
