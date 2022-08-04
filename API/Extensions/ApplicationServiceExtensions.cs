@@ -17,16 +17,19 @@ namespace API.Extensions
         {
             // *** [aznote] Cloudinary Setting
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
-            // *** [aznote] Add Interface Implementation for token.
+
+            // *** [aznote] Add Interface Implementation
             services.AddScoped<ITokenService, TokenService>();
-            // *** [aznote] Add Interface Implementation for Cloudinary.
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILikesRepository, LikesRepository>();
+
             // *** Handle process before execute httpcontext.
             services.AddScoped<LogUserActivity>();
-            // *** [aznote] Add Interface Implementation for User Repository
-            services.AddScoped<IUserRepository, UserRepository>();
+
             // *** [aznote] Add automapper implementation   
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            
             // *** [aznote] Add DB context.
             services.AddDbContext<DataContext>(option =>
             {

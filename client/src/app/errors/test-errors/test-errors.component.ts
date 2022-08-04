@@ -21,9 +21,9 @@ export class TestErrorsComponent implements OnInit {
       response => {
         console.log(response);
       }, 
-      error => {
-        console.log(error);
-      }
+      // error => {
+      //   console.log(error);
+      // }
     )
   }
 
@@ -32,9 +32,20 @@ export class TestErrorsComponent implements OnInit {
       response => {
         console.log(response);
       }, 
-      error => {
-        console.log(error);
-      }
+      // error => {
+      //   console.log(error);
+      // }
+    )
+  }
+
+  get400ErrorMessage(){
+    this.http.get(this.baseUrl + 'buggy/bad-request-message').subscribe(
+      response => {
+        console.log(response);
+      }, 
+      // error => {
+      //   console.log(error);
+      // }
     )
   }
 
@@ -43,9 +54,9 @@ export class TestErrorsComponent implements OnInit {
       response => {
         console.log(response);
       }, 
-      error => {
-        console.log(error);
-      }
+      // error => {
+      //   console.log(error);
+      // }
     )
   }
 
@@ -54,9 +65,9 @@ export class TestErrorsComponent implements OnInit {
       response => {
         console.log(response);
       }, 
-      error => {
-        console.log(error);
-      }
+      // error => {
+      //   console.log(error);
+      // }
     )
   }
 
