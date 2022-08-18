@@ -29,8 +29,9 @@ export class AccountService {
       map((response:User) => {
         const user = response;
         if(user){
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
+          // localStorage.setItem('user', JSON.stringify(user));
+          // this.currentUserSource.next(user);
         }
       })
     );
@@ -63,7 +64,14 @@ export class AccountService {
   }
 
   setCurrentUser(user: User){
-    //console.log("+++ [START] AccountService : setCurrentUser()");
+    console.log(" ### setCurrentUser : " , user);
+    user.roles = [];
+    const roles = this.getDecodedToken(user.token).role;
+    console.log(" ### user roles : " , roles);
+
+    if(roles != null)
+      Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+    
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
     // console.log("Set user to currentUserSource.next(user)");
@@ -73,5 +81,9 @@ export class AccountService {
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+  }
+
+  getDecodedToken(token){
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }
