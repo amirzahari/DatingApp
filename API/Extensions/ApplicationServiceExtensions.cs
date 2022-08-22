@@ -6,6 +6,7 @@ using API.Data;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
+using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -15,6 +16,8 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(
             this IServiceCollection services, IConfiguration config)
         {
+            services.AddSingleton<PresenceTracker>();
+
             // *** [aznote] Cloudinary Setting
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 

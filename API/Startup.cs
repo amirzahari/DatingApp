@@ -8,6 +8,7 @@ using API.Extensions;
 using API.Interfaces;
 using API.Middleware;
 using API.Services;
+using API.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +40,7 @@ namespace API
             services.AddControllers();
             services.AddCors(); // *** [aznote] Add for CORS request blocked.
             services.AddIdentityServices(_config);
+            services.AddSignalR();
 
             services.AddSwaggerGen(c =>
             {
@@ -63,7 +65,10 @@ namespace API
             app.UseRouting();
 
             // *** [aznote] Add for CORS request blocked. (specific allow URL)
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(x => x.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials() // *** for signalR
+                .WithOrigins("https://localhost:4200"));
 
             // *** [aznote] Add for recognize Bearer Authorization Token
             app.UseAuthentication();
@@ -73,6 +78,8 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }
