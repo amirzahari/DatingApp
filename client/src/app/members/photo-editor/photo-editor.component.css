@@ -4,10 +4,38 @@ img.img-thumbnail {
     margin-bottom: 2px;
 }
 
-.nv-file-over{
+.nv-file-over {
     border: dotted 3px red;
 }
 
 input[type=file] {
     color: transparent;
 }
+
+.not-approved {
+    opacity: 0.2;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+/* .img-thumbnail {
+    position: relative;
+}
+
+.img-text {
+    position: absolute;
+    bottom: 30%;
+} */

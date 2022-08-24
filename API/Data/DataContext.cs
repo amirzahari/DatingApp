@@ -23,7 +23,7 @@ namespace API.Data
         }
 
         //public DbSet<AppUser> Users { get; set; }
-
+        public DbSet<Photo> Photos { get; set; }
         public DbSet<UserLike> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -76,6 +76,9 @@ namespace API.Data
                 .HasOne(u => u.Sender) // *** one Sender user can
                 .WithMany(m => m.MessageSent) // *** send many message
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // *** filter upper level. will get the photo that is approve only
+            builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);
 
             builder.ApplyUtcDateTimeConverter();
 
