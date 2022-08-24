@@ -1,15 +1,14 @@
-<!-- <p>member-messages works!</p> -->
-
-<!-- <p *ngFor="let message of messages">{{message?.content}}</p> -->
-
 <div class="card">
     <div class="card-body">
-        <!-- <div *ngIf="messages?.length === 0"> -->
+        
         <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
             No message yet.. say hi by using the message box below
         </div>
-        <!-- <ul *ngIf="messages?.length > 0" class="chat"> -->
-        <ul *ngIf="(messageService.messageThread$ | async)?.length > 0" class="chat">
+        
+        <ul #scrollMe
+            style="overflow-y: scroll; height: 500px;"
+            [scrollTop]="scrollMe.scrollHeight"
+            *ngIf="(messageService.messageThread$ | async)?.length > 0" class="chat">
             <!-- <li *ngFor="let message of messages"> -->
             <li *ngFor="let message of (messageService.messageThread$ | async)">
                 <div>

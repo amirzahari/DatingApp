@@ -24,9 +24,10 @@ namespace API.Extensions
             // *** [aznote] Add Interface Implementation
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            // services.AddScoped<IUserRepository, UserRepository>();
+            // services.AddScoped<ILikesRepository, LikesRepository>();
+            // services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // *** Handle process before execute httpcontext.
             services.AddScoped<LogUserActivity>();
