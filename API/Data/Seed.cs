@@ -11,6 +11,8 @@ namespace API.Data
         {
             if (await userManager.Users.AnyAsync()) return;
 
+            Console.WriteLine("==> Injecting seed data");
+
             var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
             if (users == null) return;
